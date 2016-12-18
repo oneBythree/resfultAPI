@@ -1,21 +1,19 @@
 {
-  "name": "RESTful",
+  "name": "Order_NodeJS",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
+  "engines": {
+    "node": "0.12.x"
   },
   "dependencies": {
-    "body-parser": "~1.15.1",
-    "cookie-parser": "~1.4.3",
+    "blueimp-md5": "^2.1.0",
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
-    "express": "~4.13.4",
-    "jade": "~1.11.0",
-    "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0"
-  },
-  "devDependencies": {
-    "mongodb": "^2.2.11",
-    "monk": "^3.1.3"
+    "express": "~4.13.1",
+    "morgan": "~1.6.1",
+    "mysql": "^2.10.0",
+    "serve-favicon": "~2.3.0",
+    "underscore": "^1.8.3"
   }
 }
