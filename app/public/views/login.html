@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页面</title>
+    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body class="set">
+    <main role="main" class="site-content aligner">
+        <div class="aligner-item">
+            <div class="container">
+                <div class="box center-block offset-bottom-large">
+                    <h1 class="h4 page-header text-center offset-bottom">管理平台</h1>
+                    <form method="post" action="/orders/new">
+                        <div class="form-group">
+                            <label class="control-label required" for="login_username">用户名</label>
+                            <input type="email" id="login_username" name="login[username]" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label required" for="login_password">密码</label>
+                            <input type="password" id="login_password" name="login[password]" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-raised btn-block">
+                                登录
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer role="contentinfo" class="footer site-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                    © 2016 All rights reserved
+                    <span class="footer-divider">|</span> Built on <a href="http://www.bootstrap-ui.com" target="_blank">北京志恒达科技有限公司</a>
+                </div>
+                <div class="col-md-3 pull-right text-right">
+                    <a href="http://www.visionapps.cz" target="_blank" class="footer-author" title="Created by VisionApps">
+                        <img src="../images/visionapps.svg" width="90" height="16" alt="VisionApps" />
+                    </a>
+                </div>
+            </div>
+            <!-- .row -->
+        </div>
+        <!-- .container -->
+    </footer>
+</body>
+
+</html>
