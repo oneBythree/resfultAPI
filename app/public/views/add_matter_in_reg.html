@@ -111,7 +111,7 @@
             </div>
         </div>
     </div>
-    <div class="jumbotron masthead ">
+    <div class=" masthead ">
         <div class="container">
             <div style="padding-top: 10px;">
                 <ol class="breadcrumb container">
@@ -188,6 +188,14 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="IN_DATE" class="col-sm-2 control-label">明细</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <div class="form-control"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="button" class="btn btn-default">
                             <i class="glyphicon glyphicon-refresh"></i> 重置
@@ -212,7 +220,7 @@
 
     $(window).scroll(function() {
         var scrollValue = $(window).scrollTop();
-        scrollValue>45?($('.navbar,.jumbotron').addClass('closed')):($('.navbar,.jumbotron').removeClass('closed'));
+        scrollValue > 45 ? ($('.navbar,.jumbotron').addClass('closed')) : ($('.navbar,.jumbotron').removeClass('closed'));
     })
     </script>
 </body>

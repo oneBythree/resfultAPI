@@ -6,7 +6,12 @@ var express = require('express');
 var router = express.Router();
 
 var dbhelper = require('../db/helper.js');
-var helper = new dbhelper.helper();
+
+var config = require('../db/config.js');
+var mysql = require('mysql');
+var mainPool = mysql.createPool(config.main);
+
+var helper = new dbhelper.helper(mainPool);
 
 //引入公用函数
 var common = require('../common/common.js');

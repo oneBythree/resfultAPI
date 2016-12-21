@@ -1,14 +1,9 @@
-var mysql = require("mysql");
-var pool = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "test",
-    port: "3306",
-    connectionLimit: 10
-});
+// var mysql = require("mysql");
+// var config = require('./config.js');
+// var mainPool = mysql.createPool(config.main);
+// var centerPool = mysql.createPool(config.center)
 
-var helper = function() {
+var helper = function(pool) {
     this.query = function(sql, callback) {
         pool.getConnection(function(err, conn) {
             if (err) callback(err)
@@ -61,4 +56,5 @@ var helper = function() {
     }
 }
 
-exports.helper = helper;
+exports.helper= helper;
+// exports.helper(centerPool) = helperCenter;
