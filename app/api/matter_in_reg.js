@@ -38,12 +38,13 @@ router.get('/matterInReg/list', function(req, res, next) {
         data = {},
         sqlCount = '';
 
-    selectId = ' dc_matter_in_reg.DC_ID = ' + 110106223; //查询id
+    //     110106223                                   
+    selectId = ' dc_matter_in_reg.DC_ID = ' + 110109001; //查询id
     orderBy = ' ORDER BY ' + sql.oderBy; //排序
 
     var cur = !!req.query.cur ? +req.query.cur : 1; //获取当前页面
     var rowcount = !!req.query.rowcount ? +req.query.rowcount : 10; //每页数据条数
-    limit = ' LIMIT ' + rowcount * (cur - 1) + ' , ' + rowcount; //limit 拼接str
+    limit = ' LIMIT ' + rowcount * (cur - 1) + ' , ' + rowcount + ';'; //limit 拼接str
 
     selectListSql = sql.list + selectId + orderBy + limit; //拼接sql语句
 

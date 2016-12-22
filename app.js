@@ -27,6 +27,11 @@ app.use('/api', matterInReg);
 // 静态资料路径
 app.use(express.static(__dirname + '/app/public/'));
 
+//页面路由 登录
+app.get('/login', function(req, res) {
+    res.sendfile(__dirname + '/app/public/views/login.html');
+})
+
 //页面路由 matterInReg/add
 app.get('/matterInReg/add', function(req, res) {
     res.sendfile(__dirname + '/app/public/views/add_matter_in_reg.html');
