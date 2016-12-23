@@ -113,8 +113,8 @@ router.get('/matterInReg/:id', function(req, res, next) {
  */
 router.post('/matterInReg/add', function(req, res, next) {
     /**
-     * @ TRANS_ID 交易ID
-     * @ DC_ID 配送中心编码
+     * @ TRANS_ID 交易ID （20位随机数）
+     * @ DC_ID 配送中心编码 （登录用户 user）
      * @ DC_NAME 配送中心名称
      * @ IN_DATE 进场日期
      * @ BATCH_ID 批次码
