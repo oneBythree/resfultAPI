@@ -18,19 +18,19 @@
             <div class="container">
                 <div class="box center-block offset-bottom-large">
                     <h1 class="h4 page-header text-center offset-bottom">管理平台</h1>
-                    <form method="GET" action="/matterInReg/add">
+                    <form id="loginForm">
                         <div class="form-group">
-                            <label class="control-label required" for="login_username">用户名</label>
-                            <input type="email" id="login_username" name="login[username]" class="form-control" />
+                            <label class="control-label required" for="username">用户名</label>
+                            <input type="email" id="username" name="username" class="form-control" />
                         </div>
                         <div class="form-group">
-                            <label class="control-label required" for="login_password">密码</label>
-                            <input type="password" id="login_password" name="login[password]" class="form-control" />
+                            <label class="control-label required" for="password">密码</label>
+                            <input type="password" id="password" name="password" class="form-control" />
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-raised btn-block">
+                            <a href="javascript:;" id="loginButton" class="btn btn-primary btn-raised btn-block">
                                 登录
-                            </button>
+                            </a>
                         </div>
                     </form>
                 </div>
@@ -54,6 +54,46 @@
         </div>
         <!-- .container -->
     </footer>
+    <script type="text/javascript">
+    $(function() {
+
+        $('#loginButton').on('click', function(event) {
+            var _username = $('input[name="username"]').val();
+            var _password = $('input[name="password"]').val();
+
+            if (!_username) {
+                alert('用户名不能为空!');
+                return false;
+            }
+
+            if (!_password) {
+                alert('密码不能为空!');
+                return false;
+            }
+
+            $.ajax({
+                url: '/api/login',
+                type: 'POST',
+                data: {
+                    username: _username,
+                    password: _password
+                },
+                success: function(data) {
+                    if (data.data) {
+                       location.href = '/matterInReg/add';
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function(err) {
+                    alert(err);
+                }
+            })
+
+
+        });
+    })
+    </script>
 </body>
 
 </html>

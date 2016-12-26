@@ -15,6 +15,17 @@ var helper = function(pool) {
             conn.release();
         });
     };
+    this.queryArgs = function(sql, args, callback) {
+        pool.getConnection(function(err, conn) {
+            if (err) callback(err)
+                // console.log("获取连接失败,%s", err);
+            conn.query(sql, args, function(err, rows, fields) {
+                if (err) callback(err)
+                callback(err, rows);
+            });
+            conn.release();
+        });
+    };
     this.insert = function(sql, args, callback) {
         pool.getConnection(function(err, conn) {
             if (err) callback(err);
@@ -56,5 +67,5 @@ var helper = function(pool) {
     }
 }
 
-exports.helper= helper;
+exports.helper = helper;
 // exports.helper(centerPool) = helperCenter;

@@ -13,7 +13,7 @@ var _ = require('underscore');
 function resResultJSON(data, message, pageData) {
     var rz = {};
     rz.code = 200;
-    rz.result = data;
+    rz.data = data;
     if (pageData) {
         rz.cur = pageData.cur; //当前页码
         rz.rowcount = pageData.rowcount; //每页显示数据条数
@@ -24,6 +24,18 @@ function resResultJSON(data, message, pageData) {
     return rz;
 };
 
+/**
+ * [resErrorJSON api错误返回固定格式]
+ * @param  {[type]} message [错误提交]
+ * @return {[type]}         [description]
+ */
+function resErrorJSON(message){
+    var rz = {};
+    rz.code = 400;
+    rz.data = false;
+    rz.message = message;
+    return rz;
+}
 
 /**
  * [msyqlErrorAction 数据库返回异常err处理]
@@ -66,20 +78,10 @@ function jsonHasownproperty(obj, val) {
     return obj.hasOwnProperty(val) ? true : false;
 }
 
-/**
- * [defaultPage 默认分页json]
- * @type {Object}
- */
-var defaultPage = {
-    computed: {
-        cur: 1,
-        rowcount: 10
-    }
-}
 
 module.exports.resResultJSON = resResultJSON;
+module.exports.resErrorJSON = resErrorJSON;
 module.exports.msyqlErrorAction = msyqlErrorAction;
-
 module.exports.isJSON = isJSON;
 module.exports.jsonHasownproperty = jsonHasownproperty;
-module.defaultPage = defaultPage;
+
