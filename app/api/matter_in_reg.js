@@ -37,9 +37,13 @@ router.get('/matterInReg/list', function(req, res, next) {
         limit = '',
         data = {},
         sqlCount = '';
+        
+    if (!!req.session.user) {
+        res.redirect('/login');
+    }
 
-    //     110106223                                   
-    selectId = ' dc_matter_in_reg.DC_ID = ' + 110109001; //查询id
+    var DC_ID = req.session.user.JG_DM;
+    selectId = ' dc_matter_in_reg.DC_ID = ' + DC_ID; //查询id
     orderBy = ' ORDER BY ' + sql.oderBy; //排序
 
     var cur = !!req.query.cur ? +req.query.cur : 1; //获取当前页面
