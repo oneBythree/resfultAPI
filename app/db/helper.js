@@ -20,7 +20,7 @@ var helper = function(pool) {
             if (err) callback(err)
                 // console.log("获取连接失败,%s", err);
             conn.query(sql, args, function(err, rows, fields) {
-                if (err) callback(err);console.log(err);
+                if (err) callback(err)
                 callback(err, rows);
             });
             conn.release();

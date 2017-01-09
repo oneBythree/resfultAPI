@@ -4,7 +4,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
-var port = process.env.PORT || 8888;
+var port = process.env.PORT || 8080;
 
 var app = express();
 
@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(session({
     secret: 'zhd',
     cookie: {
-        maxAge: 1000 * 60 * 30 
+        maxAge: 1000 * 60 * 30
     }
 }))
 
@@ -31,6 +31,7 @@ app.use(express.static(__dirname + '/app/public/'));
 //路由限制
 app.use(function(req, res, next) {
     var url = req.originalUrl;
+    console.log(url);
     if (url != "/login" && url != '/api/login' && !req.session.user) {
         return res.redirect("/login");
     }
@@ -41,7 +42,7 @@ app.use(function(req, res, next) {
 app.use('/api', userinfo);
 app.use('/api', matterInReg);
 
-//页面路由 登录
+// /路由
 app.get('/', function(req, res) {
     res.sendfile(__dirname + '/app/public/views/login.html');
 })
@@ -51,12 +52,12 @@ app.get('/login', function(req, res) {
     res.sendfile(__dirname + '/app/public/views/login.html');
 })
 
-//页面路由 添加蔬菜进场信息
+//页面路由 matterInReg/add
 app.get('/matterInReg', function(req, res) {
     res.sendfile(__dirname + '/app/public/views/matter_in_reg.html');
 })
 
-//页面路由 添加蔬菜进场信息
+//页面路由 matterInReg/add
 app.get('/matterInReg/add', function(req, res) {
     res.sendfile(__dirname + '/app/public/views/add_matter_in_reg.html');
 })

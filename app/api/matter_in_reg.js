@@ -19,7 +19,7 @@ var common = require('../common/common.js');
 //sql语句
 var sql = {
     page: 'SELECT count(1)  as count FROM  dc_matter_in_reg WHERE',
-    list: "SELECT DISTINCT  dc_matter_in_reg.REG_ID, dc_matter_in_reg.SUPPLIER_NAME,  dc_matter_in_reg.SUPPLIER_ID,dc_matter_in_reg.IN_DATE,dc_matter_in_reg.MATTER_NAME, dc_matter_in_reg.MATTER_ID,dc_matter_in_reg.BATCH_ID, dc_matter_in_reg.DC_ID,dc_matter_in_reg.DC_NAME,dc_matter_in_reg.WEIGHT,dc_matter_in_reg.AREA_ORIGIN_ID,dc_matter_in_reg.AREA_ORIGIN_NAME, dc_matter_in_reg.PRICE,dc_matter_in_reg.GYS_ID,dc_matter_in_reg.GYS_MC ,dc_matter_in_reg.TRANSPORTER_ID FROM dc_matter_in_reg WHERE",
+    list: "SELECT DISTINCT  dc_matter_in_reg.REG_ID, dc_matter_in_reg.SUPPLIER_NAME,  dc_matter_in_reg.SUPPLIER_ID,dc_matter_in_reg.IN_DATE,dc_matter_in_reg.MATTER_NAME, dc_matter_in_reg.MATTER_ID,dc_matter_in_reg.BATCH_ID, dc_matter_in_reg.DC_ID,dc_matter_in_reg.DC_NAME,dc_matter_in_reg.WEIGHT,dc_matter_in_reg.AREA_ORIGIN_ID,dc_matter_in_reg.AREA_ORIGIN_NAME, dc_matter_in_reg.PRICE,dc_matter_in_reg.GYS_ID,dc_matter_in_reg.GYS_MC ,dc_matter_in_reg.TRANSPORTER_ID,dc_matter_in_reg.LR_SJ FROM dc_matter_in_reg WHERE",
     one: 'SELECT DISTINCT dc_matter_in_reg.REG_ID, dc_matter_in_reg.SUPPLIER_NAME, dc_matter_in_reg.SUPPLIER_ID, dc_matter_in_reg.IN_DATE,dc_matter_in_reg.MATTER_NAME,dc_matter_in_reg.MATTER_ID,dc_matter_in_reg.BATCH_ID,dc_matter_in_reg.DC_ID,dc_matter_in_reg.DC_NAME,dc_matter_in_reg.WEIGHT,dc_matter_in_reg.AREA_ORIGIN_ID,dc_matter_in_reg.AREA_ORIGIN_NAME,dc_matter_in_reg.PRICE,dc_matter_in_reg.GYS_ID,dc_matter_in_reg.GYS_MC,dc_matter_in_reg.TRANSPORTER_ID FROM dc_matter_in_reg WHERE ',
     insert: 'insert likes (TRANS_ID,DC_ID,DC_NAME,IN_DATE,BATCH_ID,MATTER_ID,MATTER_NAME,WEIGHT,PRICE,AREA_ORIGIN_ID,AREA_ORIGIN_NAME,LR_SJ,XG_SJ,CZR_ID,M_TYPE,GYS_ID,GYS_MC) VAULES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
     updata: "",
@@ -37,10 +37,8 @@ router.get('/matterInReg/list', function(req, res, next) {
         limit = '',
         data = {},
         sqlCount = '';
-        
-    if (!!req.session.user) {
-        res.redirect('/login');
-    }
+
+    // if(req.session.user)
 
     var DC_ID = req.session.user.JG_DM;
     selectId = ' dc_matter_in_reg.DC_ID = ' + DC_ID; //查询id

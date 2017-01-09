@@ -110,14 +110,62 @@
                     <li><a href="#">进场信息</a></li>
                 </ol>
             </div>
+            <table class="table table-bordered text-center">
+                <thead >
+                    <tr>
+                        <th class="text-center">查看子菜单</th>
+                        <th class="text-center">进场日期</th>
+                        <th class="text-center">供应商名称</th>
+                        <th class="text-center">总重量</th>
+                        <th class="text-center">产地</th>
+                        <th class="text-center">运输车牌号</th>
+                        <th class="text-center">操作员</th>
+                        <th class="text-center">操作时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in tableDatas">
+                        <td >
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </td>
+                        <td v-text="item.IN_DATE"></td>
+                        <td v-text="item.GYS_MC"></td>
+                        <td v-text="item.WEIGHT"></td>
+                        <td v-text="item.AREA_ORIGIN_NAME"></td>
+                        <td v-text="item.TRANSPORTER_ID"></td>
+                        <td v-text="item.DC_NAME"></td>
+                        <td v-text="item.LR_SJ"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul class="pagination">
+                <li><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li ><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
         </div>
     </div>
     <script type="text/javascript">
+
+    var myDate = function(date){
+    	this.date = new Date(date);
+    	this.year = this.date.
+    }
+
+    // Vue.filter('date', function(value) {
+
+
+    //     return value.split('').reverse().join('');
+    // })
     var app = new Vue({
         el: 'body',
         data() {
             return {
-                // myRoles: []
+                tableDatas: []
             }
         },
         ready: function() {
@@ -139,9 +187,10 @@
                     }
                 })
             },
-            initData:function(){
-                $.get('/api/matterInReg/list',{},function(rep){
-                    console.log(rep);
+            initData: function() {
+                var that = this;
+                $.get('/api/matterInReg/list', {}, function(rep) {
+                    that.tableDatas = rep.data;
                 })
             }
         },
