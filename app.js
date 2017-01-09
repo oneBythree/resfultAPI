@@ -4,7 +4,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8888;
 
 var app = express();
 
@@ -26,15 +26,15 @@ var userinfo = require('./app/api/use.js');
 var matterInReg = require('./app/api/matter_in_reg.js');
 
 // 静态资料路径
-app.use(express.static(__dirname + '/app/public/'));
+app.use(express.static(__dirname + '/app/static/'));
 
 //路由限制
 app.use(function(req, res, next) {
     var url = req.originalUrl;
     console.log(url);
-    if (url != "/login" && url != '/api/login' && !req.session.user) {
-        return res.redirect("/login");
-    }
+    // if (url != "/login" && url != '/api/login' && !req.session.user) {
+    //     return res.redirect("/login");
+    // }
     next();
 });
 
@@ -44,12 +44,12 @@ app.use('/api', matterInReg);
 
 // /路由
 app.get('/', function(req, res) {
-    res.sendfile(__dirname + '/app/public/views/login.html');
+    res.sendfile(__dirname + '/app/static/views/login.html');
 })
 
 //页面路由 登录
 app.get('/login', function(req, res) {
-    res.sendfile(__dirname + '/app/public/views/login.html');
+    res.sendfile(__dirname + '/app/static/views/login.html');
 })
 
 //页面路由 matterInReg/add

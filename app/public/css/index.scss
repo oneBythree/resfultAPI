@@ -1,3 +1,5 @@
+// @import './../bower_components/bootstrap/dist/css/bootstrap.min.css';
+
 .navbar.navbar-fixed-top {
     background: white;
     background: rgba(255, 255, 255, 0.95);
@@ -9,6 +11,7 @@
     border: 0;
     transition: all 0.3s;
 }
+
 .navbar.navbar-fixed-top.closed{
 	top:-45px;
 }
@@ -114,9 +117,7 @@
 
 /*----------------------------------------------------------------------------------- */
 
-
 /*  Dropdowns */
-
 
 /*----------------------------------------------------------------------------------- */
 

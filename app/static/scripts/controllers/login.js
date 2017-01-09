@@ -1,0 +1,1 @@
+"use strict";$(function(){$("#loginButton").on("click",function(a){var n=$('input[name="username"]').val(),t=$('input[name="password"]').val();return n?t?void $.ajax({url:"/api/login",type:"POST",data:{username:n,password:t},success:function(a){a.data?location.href="/matterInReg/add":alert(a.message)},error:function(a){alert(a)}}):(alert("密码不能为空!"),!1):(alert("用户名不能为空!"),!1)})});
