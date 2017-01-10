@@ -74,4 +74,13 @@ router.get('/role', function(req, res) {
     })
 })
 
+//角色权限
+router.get('/user', function(req, res) {
+    if (!req.session.user) {
+        res.redirect("/login");
+    }
+
+    res.json(common.resResultJSON(req.session.user, '查询用户成功！'))
+})
+
 module.exports = router;

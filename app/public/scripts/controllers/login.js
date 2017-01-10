@@ -24,7 +24,7 @@
                 },
                 success: function(data) {
                     if (data.data) {
-                        location.href = '/matterInReg/add';
+                        location.href = '/matterInReg';
                     } else {
                         alert(data.message);
                     }

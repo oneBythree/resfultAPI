@@ -32,9 +32,9 @@ app.use(express.static(__dirname + '/app/static/'));
 app.use(function(req, res, next) {
     var url = req.originalUrl;
     console.log(url);
-    // if (url != "/login" && url != '/api/login' && !req.session.user) {
-    //     return res.redirect("/login");
-    // }
+    if (url != "/login" && url != '/api/login' && !req.session.user) {
+        return res.redirect("/login");
+    }
     next();
 });
 
@@ -52,9 +52,9 @@ app.get('/login', function(req, res) {
     res.sendfile(__dirname + '/app/static/views/login.html');
 })
 
-//页面路由 matterInReg/add
+//页面路由 matterInReg 首页（列表页）
 app.get('/matterInReg', function(req, res) {
-    res.sendfile(__dirname + '/app/public/views/matter_in_reg.html');
+    res.sendfile(__dirname + '/app/static/views/matter_in_reg/index.html');
 })
 
 //页面路由 matterInReg/add

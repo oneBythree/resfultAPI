@@ -12,6 +12,9 @@ var gulp = require('gulp'),
     babel = require('gulp-babel'), // es5语法
     nodemon = require('gulp-nodemon'); // 自动重启node程序
 
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
+
 var publicPath = './app/public',
     staticPath = './app/static';
 
@@ -40,7 +43,8 @@ gulp.task('css', function() {
  * @return {[type]}   [description]
  */
 gulp.task('matterInRegConcat', function() {
-    gulp.src([publicPath + '/bower_components/vue/dist/vue.min.js', publicPath + '/bower_components/jquery/dist/jquery.min.js', publicPath + '/bower_components/bootstrap/dist/js/bootstrap.min.js', publicPath + '/scripts/filters/date.js'])
+    console.log('压缩蔬菜进场信息（列表）');
+    gulp.src([publicPath + '/scripts/filters/date.js'])
         .pipe(babel({ presets: ['es2015'] }))
         .pipe(concat('list.js'))
         .pipe(uglify().on('error', function(err) {
@@ -58,7 +62,7 @@ gulp.task('lineJs', function() {
             util.log(err);
             this.emit('end');
         }))
-        .pipe(gulp.dest(staticPath + '/scripts/controllers/'));
+    .pipe(gulp.dest(staticPath + '/scripts/controllers/'));
 })
 
 /**
@@ -94,14 +98,14 @@ gulp.task('html', function() {
 })
 
 
-gulp.task('dev', function() {
+gulp.task('node', function() {
+    // gulp.watch('')
     var stream = nodemon({
         script: 'app.js',
         ext: 'html js',
         ignore: ['ignored.js'],
-        task: ['css', 'matterInRegConcat', 'html', 'lineJs']
+        task: ['css', 'html']
     })
-
     stream
         .on('restart', function() {
             console.log('restarted!')
@@ -111,3 +115,28 @@ gulp.task('dev', function() {
             stream.emit('restart', 10) // restart the server in 10 seconds 
         })
 })
+
+
+gulp.task('server', ["node"], function() {
+    var files = [
+        publicPath + '/views/**/*.html',
+        publicPath + '/css/**/*.scss',
+        publicPath + '/scipts/**/*.js',
+        publicPath + '/images/**/*.{png,jpg,gif,ico,svg}*'
+    ];
+
+    //gulp.run(["node"]);
+    browserSync.init(files, {
+        proxy: 'http://localhost:8888',
+        browser: 'chrome',
+        notify: false,
+        port: 9999
+    });
+    gulp.watch(publicPath + '/views/**/*.html', ['html']);
+    gulp.watch(publicPath + '/css/**/*.scss', ['css']);
+    gulp.watch(publicPath + '/scripts/**/*.js', ['matterInRegConcat']);
+    // gulp.watch(publicPath + '/scripts/filters/date.js', ['matterInRegConcat'])
+    gulp.watch(publicPath + '/images/**/*.{png,jpg,gif,ico,svg}*', ['image']);
+
+    gulp.watch(files).on("change", reload);
+});
