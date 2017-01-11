@@ -1,4 +1,7 @@
 // @import './../bower_components/bootstrap/dist/css/bootstrap.min.css';
+[v-cloak] {
+    display: none;
+}
 
 .navbar.navbar-fixed-top {
     background: white;
@@ -12,9 +15,10 @@
     transition: all 0.3s;
 }
 
-.navbar.navbar-fixed-top.closed{
-	top:-45px;
+.navbar.navbar-fixed-top.closed {
+    top: -45px;
 }
+
 .navbar .container-fluid.main-nav {
     height: 66px;
     float: left;
@@ -117,7 +121,9 @@
 
 /*----------------------------------------------------------------------------------- */
 
+
 /*  Dropdowns */
+
 
 /*----------------------------------------------------------------------------------- */
 
@@ -175,11 +181,10 @@
     margin-right: 14px;
 }
 
-
-.masthead{
-	padding-top: 112px;
-	background:#fff;
-	&.closed{
-		// padding-top: 135px;
-	}
+.masthead {
+    padding-top: 112px;
+    background: #fff;
+    &.closed {
+        // padding-top: 135px;
+    }
 }

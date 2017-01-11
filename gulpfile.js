@@ -44,9 +44,9 @@ gulp.task('css', function() {
  */
 gulp.task('matterInRegConcat', function() {
     console.log('压缩蔬菜进场信息（列表）');
-    gulp.src([publicPath + '/scripts/filters/date.js'])
+    gulp.src([publicPath + '/scripts/filters/date.js', publicPath + '/scripts/components/header.js', publicPath + '/scripts/controllers/matter_in_reg/index.js'])
         .pipe(babel({ presets: ['es2015'] }))
-        .pipe(concat('list.js'))
+        .pipe(concat('index.js'))
         .pipe(uglify().on('error', function(err) {
             util.log(err);
             this.emit('end');
@@ -62,7 +62,7 @@ gulp.task('lineJs', function() {
             util.log(err);
             this.emit('end');
         }))
-    .pipe(gulp.dest(staticPath + '/scripts/controllers/'));
+        .pipe(gulp.dest(staticPath + '/scripts/controllers/'));
 })
 
 /**
@@ -132,11 +132,11 @@ gulp.task('server', ["node"], function() {
         notify: false,
         port: 9999
     });
+
     gulp.watch(publicPath + '/views/**/*.html', ['html']);
     gulp.watch(publicPath + '/css/**/*.scss', ['css']);
     gulp.watch(publicPath + '/scripts/**/*.js', ['matterInRegConcat']);
     // gulp.watch(publicPath + '/scripts/filters/date.js', ['matterInRegConcat'])
     gulp.watch(publicPath + '/images/**/*.{png,jpg,gif,ico,svg}*', ['image']);
-
     gulp.watch(files).on("change", reload);
 });
