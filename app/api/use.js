@@ -35,9 +35,9 @@ router.post('/login', function(req, res) {
     }
 
     // var sqlLogin = sql.login + "'" + username + "'";
-    console.log('---------------- 查询单个进场信息 ----------------');
+    console.log('---------------- 查询用户信息 ----------------');
     console.log(sql.login)
-    console.log('---------------------------------------------------');
+    console.log('------------------------------------------------');
     helper.queryArgs(sql.login, username, function(err, result) {
         if (err) {
             res.json(common.msyqlErrorAction(err));
@@ -63,10 +63,12 @@ router.get('/role', function(req, res) {
         res.redirect("/login");
     }
     var YH_ID = req.session.user.YH_ID;
-    console.log(req.session.user);
+    console.log('---------------- 查询用户权限 ----------------');
+    console.log(sql.role)
+    console.log('------------------------------------------------');
     helper.queryArgs(sql.role, YH_ID, function(err, result) {
         if (err) {
-        	console.log(err);
+            console.log(err);
             res.json(common.msyqlErrorAction(err));
         } else {
             res.json(common.resResultJSON(result, '查询用户权限成功！'));

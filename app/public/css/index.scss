@@ -1,7 +1,5 @@
 // @import './../bower_components/bootstrap/dist/css/bootstrap.min.css';
-[v-cloak] {
-    display: none;
-}
+
 
 .navbar.navbar-fixed-top {
     background: white;
@@ -187,4 +185,24 @@
     &.closed {
         // padding-top: 135px;
     }
+}
+
+
+[v-cloak] {
+    display: none;
+}
+
+a.iconfont{
+    text-decoration:none;
+}
+
+table.table.table-bordered,table.table.table-bordered th{
+    text-align: center;
+}
+
+ul.pagination{
+    margin-top: 0;
+}
+.table-bordered>thead>tr>td, .table-bordered>thead>tr>th{
+    border-bottom: none;
 }

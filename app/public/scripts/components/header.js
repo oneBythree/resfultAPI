@@ -84,6 +84,10 @@ Vue.component('my-header', {
         "            </div>" +
         "        </div>" +
         "</div>",
+    data: {
+        user: '',
+        roles: ''
+    },
     ready: function() {
         this.loadRole();
     },

@@ -4,7 +4,8 @@ var app = new Vue({
     el: 'body',
     data() {
         return {
-            tableDatas: []
+            tableDatas: [],
+            infoDatas: []
         }
     },
     ready: function() {
@@ -16,6 +17,10 @@ var app = new Vue({
             $.get('/api/matterInReg/list', {}, function(rep) {
                 that.tableDatas = rep.data;
             })
+        },
+        showInfo: function(item) {
+            this.infoDatas = [];
+            this.infoDatas.push(item);
         }
     }
 });
