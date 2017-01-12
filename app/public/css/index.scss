@@ -1,6 +1,4 @@
 // @import './../bower_components/bootstrap/dist/css/bootstrap.min.css';
-
-
 .navbar.navbar-fixed-top {
     background: white;
     background: rgba(255, 255, 255, 0.95);
@@ -187,22 +185,31 @@
     }
 }
 
-
 [v-cloak] {
     display: none;
 }
 
-a.iconfont{
-    text-decoration:none;
+a.iconfont {
+    text-decoration: none;
 }
 
-table.table.table-bordered,table.table.table-bordered th{
+table.table.table-bordered,
+table.table.table-bordered th {
     text-align: center;
 }
 
-ul.pagination{
+ul.pagination {
     margin-top: 0;
 }
-.table-bordered>thead>tr>td, .table-bordered>thead>tr>th{
+
+.table-bordered>thead>tr>td,
+.table-bordered>thead>tr>th {
     border-bottom: none;
+}
+
+.m-page {
+    span.pull-right {
+        vertical-align: middle;
+        padding: 6px 0px 6px 0;
+    }
 }

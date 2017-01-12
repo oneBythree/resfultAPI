@@ -23,7 +23,8 @@ var sql = {
     one: 'SELECT DISTINCT dc_matter_in_reg.REG_ID, dc_matter_in_reg.SUPPLIER_NAME, dc_matter_in_reg.SUPPLIER_ID, dc_matter_in_reg.IN_DATE,dc_matter_in_reg.MATTER_NAME,dc_matter_in_reg.MATTER_ID,dc_matter_in_reg.BATCH_ID,dc_matter_in_reg.DC_ID,dc_matter_in_reg.DC_NAME,dc_matter_in_reg.WEIGHT,dc_matter_in_reg.AREA_ORIGIN_ID,dc_matter_in_reg.AREA_ORIGIN_NAME,dc_matter_in_reg.PRICE,dc_matter_in_reg.GYS_ID,dc_matter_in_reg.GYS_MC,dc_matter_in_reg.TRANSPORTER_ID FROM dc_matter_in_reg WHERE ',
     insert: 'insert likes (TRANS_ID,DC_ID,DC_NAME,IN_DATE,BATCH_ID,MATTER_ID,MATTER_NAME,WEIGHT,PRICE,AREA_ORIGIN_ID,AREA_ORIGIN_NAME,LR_SJ,XG_SJ,CZR_ID,M_TYPE,GYS_ID,GYS_MC) VAULES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
     updata: "",
-    oderBy: "dc_matter_in_reg.IN_DATE DESC,dc_matter_in_reg.WEIGHT DESC"
+    oderBy: "dc_matter_in_reg.IN_DATE DESC,dc_matter_in_reg.WEIGHT DESC",
+    index: "SELECT REG_ID,TRANS_ID,DC_ID,DC_NAME,IN_DATE,DW_JZ,DW_SL,REMARK,AREA_ORIGIN_ID,AREA_ORIGIN_NAME,BASE_NAME,TRANSPORTER_ID,SUPPLIER_ID,SUPPLIER_NAME,LR_SJ,CZR_ID,M_TYPE,GYS_ID,GYS_MC,USERDEFINE_CODE,group_concat(BATCH_ID separator ',') AS BATCH_ID,group_concat(MATTER_NAME separator ',') AS MATTER_NAME,group_concat(MATTER_ID separator ',') AS MATTER_ID,group_concat(PRICE separator ',') AS PRICE,group_concat(WEIGHT separator ',') AS WEIGHT FROM dc_matter_in_reg WHERE DC_ID = ? GROUP BY TRANS_ID ORDER BY IN_DATE DESC,WEIGHT DESC  LIMIT 0, 10"
 }
 
 /**
@@ -48,13 +49,13 @@ router.get('/matterInReg/list', function(req, res, next) {
     var rowcount = !!req.query.rowcount ? +req.query.rowcount : 10; //每页数据条数
     limit = ' LIMIT ' + rowcount * (cur - 1) + ' , ' + rowcount + ';'; //limit 拼接str
 
-    selectListSql = sql.list + selectId + orderBy + limit; //拼接sql语句
+    // selectListSql = sql.index + selectId + orderBy + limit; //拼接sql语句
 
     console.log('---------------- 查询进场信息sql ----------------');
     console.log(selectListSql)
     console.log('---------------------------------------------------');
 
-    sqlCount = sql.page + selectId;
+    sqlCount = sql.page + selectId + ' GROUP BY TRANS_ID ';
     helper.query(sqlCount, function(err, result) { //查询总数据条数
         if (err) {
             res.json(common.msyqlErrorAction(err));
@@ -65,7 +66,7 @@ router.get('/matterInReg/list', function(req, res, next) {
             data.total = Math.ceil(result[0].count / rowcount); //总页码数
         }
         //分页查询
-        helper.query(selectListSql, function(err, result) {
+        helper.queryArgs(sql.index, [DC_ID], function(err, result) {
             if (err) {
                 res.json(common.msyqlErrorAction(err));
             } else {
