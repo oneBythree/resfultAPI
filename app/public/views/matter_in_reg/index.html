@@ -41,7 +41,7 @@
                     <tr v-for="item in tableDatas">
                         <td v-text="item.IN_DATE | date 'YYYY-MM-DD'"></td>
                         <td v-text="item.GYS_MC"></td>
-                        <td v-text="item.WEIGHT"></td>
+                        <td v-text="item.WEIGHT | count"></td>
                         <td v-text="item.AREA_ORIGIN_NAME"></td>
                         <td v-text="item.TRANSPORTER_ID"></td>
                         <td v-text="item.DC_NAME"></td>

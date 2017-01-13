@@ -51,7 +51,7 @@ var app = new Vue({
             var that = this;
             $.get('/api/matterInReg/list', { 'cur': cur }, function(rep) {
                 that.tableDatas = rep.data;
-                that.count = rep.count; 
+                that.count = rep.count;
                 that.total = rep.total;
             })
         },
@@ -76,6 +76,7 @@ var app = new Vue({
         showInfo: function(item) {
             this.infoDatas = [];
             this.infoDatas.push(item);
+            console.log(inofJson(['BATCH_ID', 'MATTER_NAME', 'WEIGHT', 'PRICE'], item));
         },
         btnClick: function(data) { //页码点击事件
             this.cur = data != this.cur ? data : this.cur;
@@ -84,3 +85,32 @@ var app = new Vue({
     }
 
 });
+
+
+function inofJson(nodeNames, item) {
+
+    var itemArry = [];
+    var childrenNode = nodeNames[0].split(',');
+    childrenNode.map(function(children) {
+        var itemjson = {};
+        nodeNames.map(function(nodeName) {
+            itemjson[nodeName] = item[nodeName];
+        })
+        itemArry.push(itemjson);
+    })
+
+    // nodeNames.map(function(nodeName) {
+    //         var itemJson = {};
+    //         var childrenNode = item[0].split(',');
+
+    //         itemjson[nodeName] = item[nodeName];
+    //         console.log(item[nodeName])
+    //     })
+    // for (var i = 0; i < nodeNames.length; i++) {
+    //     console.log(nodeNames[i])
+    //     console.log(item)
+    //     var infoNode = item.nodeNames.split(',');
+    //     // itemjson.nodeNames[i] = item.nodeNames[i][i];
+
+    return itemArry;
+}

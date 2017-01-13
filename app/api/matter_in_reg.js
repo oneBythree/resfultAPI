@@ -18,7 +18,7 @@ var common = require('../common/common.js');
 
 //sql语句
 var sql = {
-    page: 'SELECT count(1)  as count FROM  dc_matter_in_reg WHERE',
+    page: 'SELECT COUNT(1) as count FROM ( SELECT count(1)  as count FROM  dc_matter_in_reg WHERE dc_matter_in_reg.DC_ID = ? GROUP BY TRANS_ID) a',
     list: "SELECT DISTINCT  dc_matter_in_reg.REG_ID, dc_matter_in_reg.SUPPLIER_NAME,  dc_matter_in_reg.SUPPLIER_ID,dc_matter_in_reg.IN_DATE,dc_matter_in_reg.MATTER_NAME, dc_matter_in_reg.MATTER_ID,dc_matter_in_reg.BATCH_ID, dc_matter_in_reg.DC_ID,dc_matter_in_reg.DC_NAME,dc_matter_in_reg.WEIGHT,dc_matter_in_reg.AREA_ORIGIN_ID,dc_matter_in_reg.AREA_ORIGIN_NAME, dc_matter_in_reg.PRICE,dc_matter_in_reg.GYS_ID,dc_matter_in_reg.GYS_MC ,dc_matter_in_reg.TRANSPORTER_ID,dc_matter_in_reg.LR_SJ FROM dc_matter_in_reg WHERE",
     one: 'SELECT DISTINCT dc_matter_in_reg.REG_ID, dc_matter_in_reg.SUPPLIER_NAME, dc_matter_in_reg.SUPPLIER_ID, dc_matter_in_reg.IN_DATE,dc_matter_in_reg.MATTER_NAME,dc_matter_in_reg.MATTER_ID,dc_matter_in_reg.BATCH_ID,dc_matter_in_reg.DC_ID,dc_matter_in_reg.DC_NAME,dc_matter_in_reg.WEIGHT,dc_matter_in_reg.AREA_ORIGIN_ID,dc_matter_in_reg.AREA_ORIGIN_NAME,dc_matter_in_reg.PRICE,dc_matter_in_reg.GYS_ID,dc_matter_in_reg.GYS_MC,dc_matter_in_reg.TRANSPORTER_ID FROM dc_matter_in_reg WHERE ',
     insert: 'insert likes (TRANS_ID,DC_ID,DC_NAME,IN_DATE,BATCH_ID,MATTER_ID,MATTER_NAME,WEIGHT,PRICE,AREA_ORIGIN_ID,AREA_ORIGIN_NAME,LR_SJ,XG_SJ,CZR_ID,M_TYPE,GYS_ID,GYS_MC) VAULES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
@@ -51,12 +51,17 @@ router.get('/matterInReg/list', function(req, res, next) {
 
     // selectListSql = sql.index + selectId + orderBy + limit; //拼接sql语句
 
-    console.log('---------------- 查询进场信息sql ----------------');
-    console.log(selectListSql)
-    console.log('---------------------------------------------------');
+
 
     sqlCount = sql.page + selectId + ' GROUP BY TRANS_ID ';
-    helper.query(sqlCount, function(err, result) { //查询总数据条数
+    console.log('---------------- 查询进场信息总数据条数 ----------------');
+    console.log(sql.page)
+    console.log('--------------------------------------------------------');
+
+    console.log('---------------- 查询进场信息 ----------------');
+    console.log(sql.index)
+    console.log('-----------------------------------------------');
+    helper.queryArgs(sql.page, [DC_ID], function(err, result) { //查询总数据条数
         if (err) {
             res.json(common.msyqlErrorAction(err));
         } else {

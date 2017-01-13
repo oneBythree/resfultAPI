@@ -15,7 +15,7 @@
             return Array(len + 1).join(char) + value;
         }
     };
-    
+
     Vue.filter('date', function(date, format) {
         var _date = date;
         var splitArr = format.split(/(YYYY|MM|DD|hh|mm|ss)+/);
@@ -51,3 +51,22 @@
             return item;
         }).join('');
     });
+
+
+    Vue.filter('count', function(vaule) {
+        var countArray = vaule.split(',');
+        var sum = 0;
+        countArray.map(function(item) {
+            sum += parseFloat(item);
+        })
+        return sum.toFixed(2);
+    });
+
+    // Vue.filter('count', function(vaule) {
+    //     var countArray = vaule.split(',');
+    //     var sum = 0;
+    //     countArray.map(function(item) {
+    //         sum += parseFloat(item);
+    //     })
+    //     return sum.toFixed(2);
+    // });
