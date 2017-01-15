@@ -193,18 +193,20 @@ a.iconfont {
     text-decoration: none;
 }
 
-table.table.table-bordered,
-table.table.table-bordered th {
-    text-align: center;
+table.table.table-bordered {
+    margin-bottom: 0;
+    tr>th,
+    tr>td {
+        text-align: center;
+        border-bottom: none;
+    }
 }
 
-ul.pagination {
-    margin-top: 0;
-}
-
-.table-bordered>thead>tr>td,
-.table-bordered>thead>tr>th {
-    border-bottom: none;
+.modal-body {
+    &.modal-table {
+        max-height: 500px;
+        overflow-y: auto;
+    }
 }
 
 .m-page {

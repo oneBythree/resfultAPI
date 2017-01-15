@@ -75,7 +75,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">蔬菜进场详情</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body modal-table">
                     <table class="table table-bordered ">
                         <thead>
                             <tr>
@@ -95,7 +95,7 @@
                                 <td v-text="info.MATTER_NAME"></td>
                                 <td v-text="info.WEIGHT"></td>
                                 <td v-text="info.PRICE"></td>
-                                <td>{{info.WEIGHT*info.PRICE}}</td>
+                                <td>{{info.WEIGHT*info.PRICE | toFixed}}</td>
                                 <td> ---</td>
                             </tr>
                         </tbody>

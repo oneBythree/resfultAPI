@@ -75,8 +75,7 @@ var app = new Vue({
         },
         showInfo: function(item) {
             this.infoDatas = [];
-            this.infoDatas.push(item);
-            console.log(inofJson(['BATCH_ID', 'MATTER_NAME', 'WEIGHT', 'PRICE'], item));
+            this.infoDatas = inofJson(['BATCH_ID', 'MATTER_NAME', 'WEIGHT', 'PRICE'], item);
         },
         btnClick: function(data) { //页码点击事件
             this.cur = data != this.cur ? data : this.cur;
@@ -86,31 +85,17 @@ var app = new Vue({
 
 });
 
-
 function inofJson(nodeNames, item) {
 
     var itemArry = [];
-    var childrenNode = nodeNames[0].split(',');
-    childrenNode.map(function(children) {
+    var childrenNode = item[nodeNames[0]].split(',');
+    for (var i = 0; i < childrenNode.length; i++) {
         var itemjson = {};
         nodeNames.map(function(nodeName) {
-            itemjson[nodeName] = item[nodeName];
+            itemjson[nodeName] = item[nodeName].split(',')[i];
         })
         itemArry.push(itemjson);
-    })
-
-    // nodeNames.map(function(nodeName) {
-    //         var itemJson = {};
-    //         var childrenNode = item[0].split(',');
-
-    //         itemjson[nodeName] = item[nodeName];
-    //         console.log(item[nodeName])
-    //     })
-    // for (var i = 0; i < nodeNames.length; i++) {
-    //     console.log(nodeNames[i])
-    //     console.log(item)
-    //     var infoNode = item.nodeNames.split(',');
-    //     // itemjson.nodeNames[i] = item.nodeNames[i][i];
-
+    }
+    console.log(itemArry)
     return itemArry;
 }

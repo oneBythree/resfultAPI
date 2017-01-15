@@ -62,11 +62,6 @@
         return sum.toFixed(2);
     });
 
-    // Vue.filter('count', function(vaule) {
-    //     var countArray = vaule.split(',');
-    //     var sum = 0;
-    //     countArray.map(function(item) {
-    //         sum += parseFloat(item);
-    //     })
-    //     return sum.toFixed(2);
-    // });
+    Vue.filter('toFixed', function(vaule) {
+        return vaule.toFixed(2);
+    });
