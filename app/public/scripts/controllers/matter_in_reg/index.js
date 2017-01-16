@@ -72,6 +72,11 @@ var app = new Vue({
                 that.count = rep.count;
                 that.total = rep.total;
             })
+
+            $.get('/api/supplier/list', { type: 'c' }, function(rep) {
+                console.log(rep);
+
+            })
         },
         showInfo: function(item) {
             this.infoDatas = [];

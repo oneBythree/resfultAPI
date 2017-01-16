@@ -38,9 +38,8 @@ router.get('/matterInReg/list', function(req, res, next) {
     var DC_ID = req.session.user.JG_DM;
     var cur = !!req.query.cur ? +req.query.cur : 1; //获取当前页面
     var rowcount = !!req.query.rowcount ? +req.query.rowcount : 10; //每页数据条数
-
     var start = !!req.query.start ? req.query.start : '2010-01-01';
-    var end = req.query.start ? req.query.end : '2017-01-16';
+    var end = req.query.start ? req.query.end : new common.Date().Format('yyyy-MM-dd');
 
 
 
@@ -73,7 +72,6 @@ router.get('/matterInReg/list', function(req, res, next) {
             }
         })
     })
-
 })
 
 /**INSERT INTO `dc_matter_in_reg` (`TRANS_ID`, `DC_ID`, `DC_NAME`) VALUES ('8708106955506925809', '110108262', '北京蓝波绿农科技有限公司')

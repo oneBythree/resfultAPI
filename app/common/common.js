@@ -29,7 +29,7 @@ function resResultJSON(data, message, pageData) {
  * @param  {[type]} message [错误提交]
  * @return {[type]}         [description]
  */
-function resErrorJSON(message){
+function resErrorJSON(message) {
     var rz = {};
     rz.code = 400;
     rz.data = false;
@@ -79,9 +79,25 @@ function jsonHasownproperty(obj, val) {
 }
 
 
+Date.prototype.Format = function(fmt) { //author: meizz 
+    var o = {
+        "M+": this.getMonth() + 1, //月份 
+        "d+": this.getDate(), //日 
+        "h+": this.getHours(), //小时 
+        "m+": this.getMinutes(), //分 
+        "s+": this.getSeconds(), //秒 
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+        "S": this.getMilliseconds() //毫秒 
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}
+
 module.exports.resResultJSON = resResultJSON;
 module.exports.resErrorJSON = resErrorJSON;
 module.exports.msyqlErrorAction = msyqlErrorAction;
 module.exports.isJSON = isJSON;
 module.exports.jsonHasownproperty = jsonHasownproperty;
-
+module.exports.Date = Date;

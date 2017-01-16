@@ -24,6 +24,7 @@ app.use(session({
 
 var userinfo = require('./app/api/use.js');
 var matterInReg = require('./app/api/matter_in_reg.js');
+var supplier = require('./app/api/supplier.js');
 
 // 静态资料路径
 app.use(express.static(__dirname + '/app/static/'));
@@ -39,8 +40,9 @@ app.use(function(req, res, next) {
 });
 
 //api接口
-app.use('/api', userinfo);
+app.use('/api', userinfo); //用户接口
 app.use('/api', matterInReg);
+app.use('/api', supplier);
 
 // /路由
 app.get('/', function(req, res) {
