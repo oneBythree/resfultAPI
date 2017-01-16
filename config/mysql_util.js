@@ -5,33 +5,6 @@
 var config = require('./config.js');
 var mysql = require('mysql');
 
-// function MySQLClient() {
-//     var connection;
-
-//     MySQLClient.prototype.connect = function(callback) {
-//         connection = mysql.createConnection(config.db);
-//         connection.connect(callback);
-//     };
-
-//     MySQLClient.prototype.exec = function(sql,value,callback){
-//         if(connection){
-//             connection.qurey(sql,value,callback);
-//         }else{
-//             console.log('连接数据库失败！');
-//         }
-//     };
-
-//     MySQLClient.prototype.end = function(callback){
-//         if(connection){
-//             connection.end(callback);
-//         }else{
-//             console.log('连接数据库失败！')
-//         }
-//     }
-// }
-
-// module.exports = MySQLClient;
-// 
 var helper = function() {
     this.query = function(sql, callback) {
         pool.getConnection(function(err, conn) {

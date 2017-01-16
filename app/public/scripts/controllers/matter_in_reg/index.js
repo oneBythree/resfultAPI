@@ -96,6 +96,16 @@ function inofJson(nodeNames, item) {
         })
         itemArry.push(itemjson);
     }
-    console.log(itemArry)
     return itemArry;
 }
+
+
+$(function() {
+    $('.input-daterange').datepicker({
+        language: 'zh-CN',
+        orientation: "bottom auto",
+        autoclose: true,
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+    });
+})
