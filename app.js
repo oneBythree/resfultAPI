@@ -61,8 +61,9 @@ app.get('/matterInReg', function(req, res) {
 
 //页面路由 matterInReg/add
 app.get('/matterInReg/add', function(req, res) {
-    res.sendfile(__dirname + '/app/public/views/add_matter_in_reg.html');
+    res.sendfile(__dirname + '/app/static/views/matter_in_reg/add.html');
 })
+
 
 app.listen(port, function() {
     console.log('node 服务已开启,监听端口号：' + port)

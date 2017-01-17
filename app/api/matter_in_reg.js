@@ -24,7 +24,8 @@ var sql = {
     insert: 'insert likes (TRANS_ID,DC_ID,DC_NAME,IN_DATE,BATCH_ID,MATTER_ID,MATTER_NAME,WEIGHT,PRICE,AREA_ORIGIN_ID,AREA_ORIGIN_NAME,LR_SJ,XG_SJ,CZR_ID,M_TYPE,GYS_ID,GYS_MC) VAULES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
     updata: "",
     oderBy: "dc_matter_in_reg.IN_DATE DESC,dc_matter_in_reg.WEIGHT DESC",
-    index: "SELECT REG_ID,TRANS_ID,DC_ID,DC_NAME,IN_DATE,DW_JZ,DW_SL,REMARK,AREA_ORIGIN_ID,AREA_ORIGIN_NAME,BASE_NAME,TRANSPORTER_ID,SUPPLIER_ID,SUPPLIER_NAME,LR_SJ,CZR_ID,M_TYPE,GYS_ID,GYS_MC,USERDEFINE_CODE,group_concat(BATCH_ID separator ',') AS BATCH_ID,group_concat(MATTER_NAME separator ',') AS MATTER_NAME,group_concat(MATTER_ID separator ',') AS MATTER_ID,group_concat(PRICE separator ',') AS PRICE,group_concat(WEIGHT separator ',') AS WEIGHT FROM dc_matter_in_reg WHERE DC_ID = ? AND IN_DATE BETWEEN ? AND ? GROUP BY TRANS_ID ORDER BY IN_DATE DESC,WEIGHT DESC LIMIT ?, ?"
+    index: "SELECT REG_ID,TRANS_ID,DC_ID,DC_NAME,IN_DATE,DW_JZ,DW_SL,REMARK,AREA_ORIGIN_ID,AREA_ORIGIN_NAME,BASE_NAME,TRANSPORTER_ID,SUPPLIER_ID,SUPPLIER_NAME,LR_SJ,CZR_ID,M_TYPE,GYS_ID,GYS_MC,USERDEFINE_CODE,group_concat(BATCH_ID separator ',') AS BATCH_ID,group_concat(MATTER_NAME separator ',') AS MATTER_NAME,group_concat(MATTER_ID separator ',') AS MATTER_ID,group_concat(PRICE separator ',') AS PRICE,group_concat(WEIGHT separator ',') AS WEIGHT FROM dc_matter_in_reg WHERE DC_ID = ?  AND IN_DATE BETWEEN ? AND ? GROUP BY TRANS_ID ORDER BY IN_DATE DESC,WEIGHT DESC LIMIT ?, ?",
+    // indexSupplier:'SELECT * f'
 }
 
 /**
@@ -39,7 +40,14 @@ router.get('/matterInReg/list', function(req, res, next) {
     var cur = !!req.query.cur ? +req.query.cur : 1; //获取当前页面
     var rowcount = !!req.query.rowcount ? +req.query.rowcount : 10; //每页数据条数
     var start = !!req.query.start ? req.query.start : '2010-01-01';
-    var end = req.query.start ? req.query.end : new common.Date().Format('yyyy-MM-dd');
+    var end = !!req.query.end ? req.query.end : new common.Date().Format('yyyy-MM-dd');
+    end = common.addDate(end); // beteen 加一天
+
+    // if(req)
+
+    // if(new Date(start).getTime() == new Date(end).getTime()){
+    //     end = common.addDate(end);
+    // }
 
 
 
@@ -49,7 +57,13 @@ router.get('/matterInReg/list', function(req, res, next) {
     console.log('--------------------------------------------------------');
 
     console.log('---------------- 查询进场信息 ----------------');
-    var sqlIndex = mysql.format(sql.index, [DC_ID, start, end, rowcount * (cur - 1), rowcount]);
+    // console.log(helper.escape("= '' "))
+    var sqlIndex = '';
+    if (!!req.query.GYS_ID) {
+        sqlIndex = 'SELECT * from (' + mysql.format(sql.index, [DC_ID, start, end, rowcount * (cur - 1), rowcount]) + ') t WHERE GYS_ID =' + req.query.GYS_ID.toString();
+    } else {
+        sqlIndex = mysql.format(sql.index, [DC_ID, start, end, rowcount * (cur - 1), rowcount]);
+    }
     console.log(sqlIndex)
     console.log('-----------------------------------------------');
 

@@ -79,6 +79,10 @@ function jsonHasownproperty(obj, val) {
 }
 
 
+/**
+ * [Format description]
+ * @param {[type]} fmt [description]
+ */
 Date.prototype.Format = function(fmt) { //author: meizz 
     var o = {
         "M+": this.getMonth() + 1, //月份 
@@ -95,9 +99,44 @@ Date.prototype.Format = function(fmt) { //author: meizz
     return fmt;
 }
 
+/**
+ * [addDate description]
+ * @param {[type]} date [description]
+ * @param {[type]} days [description]
+ */
+function addDate(date, days) {
+    if (days == undefined || days == '') {
+        days = 1;
+    }
+    var date = new Date(date);
+    date.setDate(date.getDate() + days);
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    return date.getFullYear() + '-' + addZero(month) + '-' + addZero(day);
+}
+
+/**
+ * [addZero补零  description]
+ * @param {[type]} arg [description]
+ */
+function addZero(arg) {
+    if (arg == undefined || arg == '') {
+        return '';
+    }
+
+    var re = arg + '';
+    if (re.length < 2) {
+        re = '0' + re;
+    }
+
+    return re;
+}
+
 module.exports.resResultJSON = resResultJSON;
 module.exports.resErrorJSON = resErrorJSON;
 module.exports.msyqlErrorAction = msyqlErrorAction;
 module.exports.isJSON = isJSON;
 module.exports.jsonHasownproperty = jsonHasownproperty;
 module.exports.Date = Date;
+module.exports.addDate = addDate;
+module.exports.addZero = addZero;

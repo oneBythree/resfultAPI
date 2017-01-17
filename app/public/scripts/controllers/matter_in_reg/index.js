@@ -6,6 +6,8 @@ var app = new Vue({
         return {
             tableDatas: [],
             infoDatas: [],
+            selectDatas: [],
+            GYS_ID: null,
             total: null,
             cur: 1,
             count: null
@@ -74,8 +76,7 @@ var app = new Vue({
             })
 
             $.get('/api/supplier/list', { type: 'c' }, function(rep) {
-                console.log(rep);
-
+                that.selectDatas = rep.data;
             })
         },
         showInfo: function(item) {
@@ -85,7 +86,33 @@ var app = new Vue({
         btnClick: function(data) { //页码点击事件
             this.cur = data != this.cur ? data : this.cur;
         },
-
+        search: function() {
+            var start = this.start;
+            var end = this.end;
+            var GYS_ID = this.GYS_ID;
+            var dataJSON;
+            if (!!GYS_ID) {
+                dataJSON = { 'start': start, 'end': end, 'GYS_ID': GYS_ID }
+            } else {
+                dataJSON = { 'start': start, 'end': end }
+            }
+            var that = this;
+            $.get('/api/matterInReg/list', dataJSON, function(rep) {
+                that.tableDatas = rep.data;
+                that.count = rep.count;
+                that.total = rep.total;
+            })
+        },
+        selectedOption: function(id) {
+            this.GYS_ID = id;
+        },
+        resetFnc: function() {
+            this.start = '';
+            this.end = '';
+            this.GYS_ID = '';
+            $('.selectpicker').selectpicker('val', '');
+            this.initData();
+        }
     }
 
 });

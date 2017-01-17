@@ -228,79 +228,78 @@
         </div>
     </div>
     <script type="text/javascript">
-    $('#sandbox-container input').datepicker({
-        language: 'zh-CN',
-        orientation: "bottom auto",
-        autoclose: true,
-        todayHighlight: true,
-        format: 'yyyy-mm-dd',
-        todayBtn: true,
-    });
+    // $('#sandbox-container input').datepicker({
+    //     language: 'zh-CN',
+    //     orientation: "bottom auto",
+    //     autoclose: true,
+    //     todayHighlight: true,
+    //     format: 'yyyy-mm-dd',
+    //     todayBtn: true,
+    // });
 
-    $(window).scroll(function() {
-        var scrollValue = $(window).scrollTop();
-        scrollValue > 45 ? ($('.navbar,.jumbotron').addClass('closed')) : ($('.navbar,.jumbotron').removeClass('closed'));
-    })
-
-
+    // $(window).scroll(function() {
+    //     var scrollValue = $(window).scrollTop();
+    //     scrollValue > 45 ? ($('.navbar,.jumbotron').addClass('closed')) : ($('.navbar,.jumbotron').removeClass('closed'));
+    // })
 
 
-    var app = new Vue({
-        el: 'body',
-        data() {
-            return {
-                // myRoles: []
-            }
-        },
-        ready: function() {
-            this.loadRole();
-
-        },
-        methods: {
-            loadRole: function() {
-                var self = this;
-                $.ajax({
-                    url: '/api/role',
-                    type: 'GET',
-                    success: function(data) {
-                        self.$set('roles', changeRoleJson(data.data));
-                        console.log(self.roles);
-                    },
-                    error: function(data) {
-                        console.log(data);
-                    }
-                })
-            }
-        },
-        computed: {
-
-        }
-    })
 
 
-    function changeRoleJson(dataJson) {
-        dataJson.map(function(item) {
-            switch (item.CD_DM) {
-                case 65:
-                    item.icon = 'glyphicon glyphicon-log-in';
-                    item.url = '/matterInReg';
-                    break;
-                case 68:
-                    item.icon = 'glyphicon glyphicon-compressed';
-                    item.url = '/matterInQuar';
-                    break;
-                  case 69:
-                    item.icon = 'glyphicon glyphicon-credit-card';
-                    item.url = '/matterInSale';
-                    break;
-                default:
-                    item.icon = 'glyphicon glyphicon-th';
-                    item.url = '/';
-                    break;
-            }
-        })
-        return dataJson;
-    }
+    // var app = new Vue({
+    //     el: 'body',
+    //     data() {
+    //         return {
+    //         }
+    //     },
+    //     ready: function() {
+    //         this.loadRole();
+
+    //     },
+    //     methods: {
+    //         loadRole: function() {
+    //             var self = this;
+    //             $.ajax({
+    //                 url: '/api/role',
+    //                 type: 'GET',
+    //                 success: function(data) {
+    //                     self.$set('roles', changeRoleJson(data.data));
+    //                     console.log(self.roles);
+    //                 },
+    //                 error: function(data) {
+    //                     console.log(data);
+    //                 }
+    //             })
+    //         }
+    //     },
+    //     computed: {
+
+    //     }
+    // })
+
+
+    // function changeRoleJson(dataJson) {
+    //     dataJson.map(function(item) {
+    //         switch (item.CD_DM) {
+    //             case 65:
+    //                 item.icon = 'glyphicon glyphicon-log-in';
+    //                 item.url = '/matterInReg';
+    //                 break;
+    //             case 68:
+    //                 item.icon = 'glyphicon glyphicon-compressed';
+    //                 item.url = '/matterInQuar';
+    //                 break;
+    //               case 69:
+    //                 item.icon = 'glyphicon glyphicon-credit-card';
+    //                 item.url = '/matterInSale';
+    //                 break;
+    //             default:
+    //                 item.icon = 'glyphicon glyphicon-th';
+    //                 item.url = '/';
+    //                 break;
+    //         }
+    //     })
+    //     return dataJson;
+    // }
     </script>
 </body>
 

@@ -43,7 +43,6 @@ gulp.task('css', function() {
  * @return {[type]}   [description]
  */
 gulp.task('matterInRegConcat', function() {
-    console.log('压缩蔬菜进场信息（列表）');
     gulp.src([publicPath + '/scripts/filters/date.js', publicPath + '/scripts/components/header.js', publicPath + '/scripts/controllers/matter_in_reg/index.js'])
         .pipe(babel({ presets: ['es2015'] }))
         .pipe(concat('index.js'))
