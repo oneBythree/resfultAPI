@@ -84,7 +84,7 @@ Vue.component('my-header', {
         "            </div>" +
         "        </div>" +
         "</div>",
-    data: {
+    props: {
         user: '',
         roles: ''
     },
@@ -93,16 +93,9 @@ Vue.component('my-header', {
     },
     methods: {
         loadRole: function() {
-            var self = this;
-            $.ajax({
-                url: '/api/role',
-                type: 'GET',
-                success: function(data) {
-                    self.$set('roles', changeRoleJson(data.data));
-                },
-                error: function(data) {
-                    console.log(data);
-                }
+            var self = this; 
+            $.get('/api/role', {}, function(rs) {
+                self.$set('roles', changeRoleJson(rs.data))
             })
 
             $.get('/api/user', {}, function(rs) {

@@ -54,6 +54,19 @@ gulp.task('matterInRegConcat', function() {
 })
 
 
+
+gulp.task('matterInRegAddConcat', function() {
+    gulp.src([publicPath + '/scripts/filters/date.js', publicPath + '/scripts/components/header.js', publicPath + '/scripts/controllers/matter_in_reg/add.js'])
+        .pipe(babel({ presets: ['es2015'] }))
+        .pipe(concat('add.js'))
+        .pipe(uglify().on('error', function(err) {
+            util.log(err);
+            this.emit('end');
+        }))
+        .pipe(gulp.dest(staticPath + '/scripts/controllers/matter_in_reg/'));
+})
+
+
 gulp.task('lineJs', function() {
     gulp.src([publicPath + '/scripts/controllers/**/*.js', '!' + publicPath + '/scripts/components/**/*.js', '!' + publicPath + '/scripts/filter/**/*.js', '!' + publicPath + '/scripts/matter_in_reg/**/*.js'])
         .pipe(babel({ presets: ['es2015'] }))
@@ -134,8 +147,8 @@ gulp.task('server', ["node"], function() {
 
     gulp.watch(publicPath + '/views/**/*.html', ['html']);
     gulp.watch(publicPath + '/css/**/*.scss', ['css']);
-    gulp.watch(publicPath + '/scripts/**/*.js', ['matterInRegConcat']);
-    // gulp.watch(publicPath + '/scripts/filters/date.js', ['matterInRegConcat'])
+    gulp.watch(publicPath + '/scripts/**/*.js', ['matterInRegConcat', 'matterInRegAddConcat']);
     gulp.watch(publicPath + '/images/**/*.{png,jpg,gif,ico,svg}*', ['image']);
     gulp.watch(files).on("change", reload);
+
 });

@@ -1,4 +1,3 @@
-// @import './../bower_components/bootstrap/dist/css/bootstrap.min.css';
 .navbar.navbar-fixed-top {
     background: white;
     background: rgba(255, 255, 255, 0.95);
@@ -216,6 +215,24 @@ table.table.table-bordered {
     }
 }
 
-.mar-bt20{
+.mar-bt20 {
     margin-bottom: 20px
+}
+
+.row.distpicker {
+    // 表单 三级联动样式
+    // margin: 0;
+    select {
+        // width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        margin-left: 15px;
+        // &:last-of-type {
+        //     margin-left: 0;
+        // }
+    }
 }

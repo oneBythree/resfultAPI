@@ -10,7 +10,9 @@ var app = new Vue({
             GYS_ID: null,
             total: null,
             cur: 1,
-            count: null
+            count: null,
+            start: '',
+            end: ''
         }
     },
     ready: function() {
@@ -89,7 +91,7 @@ var app = new Vue({
         search: function() {
             var start = this.start;
             var end = this.end;
-            var GYS_ID = this.GYS_ID;
+            var GYS_ID = $('.selectpicker').find('option:selected').val();
             var dataJSON;
             if (!!GYS_ID) {
                 dataJSON = { 'start': start, 'end': end, 'GYS_ID': GYS_ID }

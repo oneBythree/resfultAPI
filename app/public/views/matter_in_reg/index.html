@@ -40,12 +40,10 @@
                 <div class="form-group">
                     <label class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供应商&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <select  class="selectpicker" data-live-search="true"  title="选择供应商" data-size="5" data-max-options="1" multiple>
-                        <option v-for="select in selectDatas"  :value="option.ID">{{select.NAME}}</option>
+                        <option v-for="select in selectDatas" :value="select.ID">{{select.NAME}}</option>
                     </select>
                 </div>
-                <!--  <div class="form-group">
-                    <v-select :options="['foo','bar','baz']"></v-select>
-                </div> -->
+        
                 <div class="form-group">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="button" class="btn btn-primary" @click="search">查询</button>
