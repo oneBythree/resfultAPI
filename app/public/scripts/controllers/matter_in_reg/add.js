@@ -6,6 +6,7 @@ var app = new Vue({
         return {
             breadcrumb: '',
             inDate: '',
+            supplierDomes: []
         }
     },
     ready: function() {
@@ -15,12 +16,26 @@ var app = new Vue({
         validateUrl: function() {
             var urlArray = location.href.split('/');
             if (urlArray[urlArray.length - 1] == 'add') {
-                this.breadcrumb = '添加';
-                this.inDate = new Date();
+                this.add();
             }
+
+            this.supplierAjax();
         },
         add: function() {
+            this.breadcrumb = '添加';
+            this.inDate = new Date();
+            $('#distpicker').distpicker({
+                province: '---- 所在省 ----',
+                city: '---- 所在市 ----',
+                district: '---- 所在区 ----'
+            });
 
+        },
+        supplierAjax: function() {
+            var that = this;
+            $.get('/api/supplier/list', { 'type': 'c' }, function(rep) {
+                that.supplierDomes = rep.data.slice(0, 3);
+            })
         }
     },
     computed: {
@@ -38,5 +53,7 @@ $(function() {
         format: 'yyyy-mm-dd',
     });
 
-    $("#distpicker").distpicker();
+
+
+    // $("#distpicker").distpicker();
 })

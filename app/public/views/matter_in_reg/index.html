@@ -22,12 +22,10 @@
     <my-header></my-header>
     <div class="masthead">
         <div class="container">
-            <div style="padding-top: 10px;">
-                <ol class="breadcrumb container">
-                    <li><a href="#">回到主页</a></li>
-                    <li><a href="#">进场信息</a></li>
-                </ol>
-            </div>
+            <ol class="breadcrumb container" style="margin-top: 20px;">
+                <li><a href="#">回到主页</a></li>
+                <li><a href="#">进场信息</a></li>
+            </ol>
             <form class="form-inline mar-bt20 clearfix" role="form">
                 <div class="form-group">
                     <label class="control-label">时间段&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -39,18 +37,17 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供应商&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    <select  class="selectpicker" data-live-search="true"  title="选择供应商" data-size="5" data-max-options="1" multiple>
+                    <select class="selectpicker" data-live-search="true" title="选择供应商" data-size="5" data-max-options="1" multiple>
                         <option v-for="select in selectDatas" :value="select.ID">{{select.NAME}}</option>
                     </select>
                 </div>
-        
                 <div class="form-group">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="button" class="btn btn-primary" @click="search">查询</button>
                     &nbsp;&nbsp;
                     <button type="button" class="btn btn-primary" @click="resetFnc">重置</button>
                 </div>
-                <a  class="btn btn-primary pull-right" href="/matterInReg/add">添加</a>
+                <a class="btn btn-primary pull-right" href="/matterInReg/add">添加</a>
             </form>
             <div v-if="tableDatas.length>0">
                 <table class="table table-bordered ">

@@ -10,9 +10,8 @@ var app = express();
 
 app.set('view engine', 'html');
 
-app.use(bodyParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({
     secret: 'zhd',
@@ -46,22 +45,22 @@ app.use('/api', supplier);
 
 // /路由
 app.get('/', function(req, res) {
-    res.sendfile(__dirname + '/app/static/views/login.html');
+    res.sendFile(__dirname + '/app/static/views/login.html');
 })
 
 //页面路由 登录
 app.get('/login', function(req, res) {
-    res.sendfile(__dirname + '/app/static/views/login.html');
+    res.sendFile(__dirname + '/app/static/views/login.html');
 })
 
 //页面路由 matterInReg 首页（列表页）
 app.get('/matterInReg', function(req, res) {
-    res.sendfile(__dirname + '/app/static/views/matter_in_reg/index.html');
+    res.sendFile(__dirname + '/app/static/views/matter_in_reg/index.html');
 })
 
 //页面路由 matterInReg/add
 app.get('/matterInReg/add', function(req, res) {
-    res.sendfile(__dirname + '/app/static/views/matter_in_reg/add.html');
+    res.sendFile(__dirname + '/app/static/views/matter_in_reg/add.html');
 })
 
 

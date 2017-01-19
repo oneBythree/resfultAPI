@@ -1,5 +1,5 @@
 /**
- * 供应商 api 接口
+ * 供应商/供货单位 api 接口
  */
 
 var express = require('express');

@@ -14,8 +14,8 @@
     <script type="text/javascript" src="../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="../bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="../../bower_components/distpicker/dist/distpicker.data.js"></script>
-    <script type="text/javascript" src="../../bower_components/distpicker/dist/distpicker.js"></script>
+    <script type="text/javascript" src="../../bower_components/distpicker/dist/distpicker.data.min.js"></script>
+    <script type="text/javascript" src="../../bower_components/distpicker/dist/distpicker.min.js"></script>
     <script type="text/javascript" src="../bower_components/vue/dist/vue.js"></script>
 </head>
 
@@ -23,27 +23,22 @@
     <my-header></my-header>
     <div class=" masthead ">
         <div class="container">
-            <div style="padding-top: 10px;">
-                <ol class="breadcrumb container">
-                    <li><a href="#">回到主页</a></li>
-                    <li><a href="/matterInReg">进场信息</a></li>
-                    <li class="active">{{breadcrumb}}</li>
-                </ol>
-            </div>
+            <ol class="breadcrumb container" style="margin-top: 20px;">
+                <li><a href="#">回到主页</a></li>
+                <li><a href="/matterInReg">进场信息</a></li>
+                <li class="active">{{breadcrumb}}</li>
+            </ol>
             <form role="form" class="form-horizontal">
                 <div class="form-group">
                     <label for="TRANS_ID" class="col-sm-2 control-label">选择模板</label>
-                    <label class="checkbox-inline">
-                        <input type="radio" name="demo" id="optionsRadios3" value="option1" checked> 测试
-                    </label>
-                    <label class="checkbox-inline">
-                        <input type="radio" name="demo" id="optionsRadios4" value="option2"> 武汉
+                    <label class="checkbox-inline" v-for="dome in supplierDomes">
+                        <input type="radio" name="demo" value="dome.ID"> {{dome.NAME}}
                     </label>
                 </div>
                 <div class="form-group">
                     <label for="TRANS_ID" class="col-sm-2 control-label">供应商</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="" placeholder="供应商">
+                        <input type="text" class="form-control" name="" placeholder="请输入供应商名称">
                     </div>
                 </div>
                 <div class="form-group">
@@ -55,10 +50,10 @@
                 <div class="form-group">
                     <label for="IN_DATE" class="col-sm-2 control-label">产地</label>
                     <div class="col-sm-10">
-                        <div id="distpicker" data-toggle="distpicker" class="row distpicker">
-                            <select class="col-sm-3" data-province="---- 选择省 ----"></select>
-                            <select class="col-sm-3" data-city="---- 选择市 ----"></select>
-                            <select class="col-sm-3" data-district="---- 选择区 ----"></select>
+                        <div id="aa" data-toggle="distpicker" class="row distpicker">
+                            <select class="col-sm-3"></select>
+                            <select class="col-sm-3"></select>
+                            <select class="col-sm-3"></select>
                         </div>
                     </div>
                 </div>
@@ -80,6 +75,27 @@
                         <select class="form-control">
                             <option>111</option>
                         </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="IN_DATE" class="col-sm-2 control-label">进场详情</label>
+                    <div class="col-sm-10 ">
+                      <!--   <fieldset>
+                            <legend>进场详情</legend> -->
+                            <table class="table table-bordered ">
+                                <thead>
+                                    <tr>
+                                        <th>商品名称</th>
+                                        <th>规格</th>
+                                        <th>数量</th>
+                                        <th>重量(公斤)</th>
+                                        <th>单价(元/公斤)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                       <!--  </fieldset> -->
                     </div>
                 </div>
                 <div class="form-group">
